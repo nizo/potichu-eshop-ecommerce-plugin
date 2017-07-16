@@ -23,19 +23,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p><?php echo $order->get_formatted_billing_address(); ?></p>
 
 			<?php
-			$companyName = get_post_meta( $order->id, '_billing_company_name', true );
-			$companyIco = get_post_meta( $order->id, '_billing_ico', true );
-			$companyDic = get_post_meta( $order->id, '_billing_dic', true );
-			$companyIcDph = get_post_meta( $order->id, '_billing_ic_dph', true );
 
-			if ($companyName != '')
-				echo '<strong>Názov spoločnosti:</strong> ' . $companyName . '</br>';
-			if ($companyIco != '')
-				echo '<strong>'.__('IČO').':</strong> ' . $companyIco . '</br>';
-			if ($companyDic != '')
-				echo '<strong>'.__('DIČ').':</strong> ' . $companyDic . '</br>';
-			if ($companyIcDph != '')
-				echo '<strong>'.__('ič DPH').':</strong> ' . $companyIcDph . '</br></br>';
+			if (get_post_meta( $order->id, '_billing_firm_data_region', true ) == 1) {
+
+				$companyName = get_post_meta( $order->id, '_billing_company_name', true );
+				$companyIco = get_post_meta( $order->id, '_billing_ico', true );
+				$companyDic = get_post_meta( $order->id, '_billing_dic', true );
+				$companyIcDph = get_post_meta( $order->id, '_billing_ic_dph', true );
+
+				if ($companyName != '')
+					echo '<p><strong>Názov spoločnosti:</strong> ' . $companyName . '</p>';
+				if ($companyIco != '')
+					echo '<p><strong>'.__('IČO').':</strong> ' . $companyIco . '</p>';
+				if ($companyDic != '')
+					echo '<p><strong>'.__('DIČ').':</strong> ' . $companyDic . '</p>';
+				if ($companyIcDph != '')
+					echo '<p><strong>'.__('ič DPH').':</strong> ' . $companyIcDph . '</p>';
+			}
 			?>			
 
 		</td>

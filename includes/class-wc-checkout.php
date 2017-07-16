@@ -333,7 +333,6 @@ class WC_Checkout {
 		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'woocommerce-process_checkout' ) ) {
 			return;
 		}
-		prof_flag("checkout start");
 
 		
 		if ( ! defined( 'WOOCOMMERCE_CHECKOUT' ) )
@@ -384,8 +383,7 @@ class WC_Checkout {
 		// Note if we skip shipping
 		$skipped_shipping = false;
 
-		// Get posted checkout_fields and do validation
-		prof_flag("validation of checkoutfields");
+		// Get posted checkout_fields and do validation		
 		foreach ( $this->checkout_fields as $fieldset_key => $fieldset ) {
 
 			// Skip shipping if not needed
@@ -531,8 +529,7 @@ class WC_Checkout {
 			$_SESSION['billing_region'] = $this->posted['billing_region'];
 			
 
-		// Update cart totals now we have customer address
-		prof_flag("calculate totals");
+		// Update cart totals now we have customer address		
 		WC()->cart->calculate_totals();
 
 		// Terms
@@ -581,8 +578,7 @@ class WC_Checkout {
 		}
 
 		
-		
-		prof_flag("payment");
+				
 		if ( WC()->cart->needs_payment() ) {
 
 			// Payment Method
@@ -599,14 +595,12 @@ class WC_Checkout {
 		
 		
 		// Action after validation
-		do_action( 'woocommerce_after_checkout_validation', $this->posted );
-		prof_flag("woocomemrce_after_checkout_validation");
+		do_action( 'woocommerce_after_checkout_validation', $this->posted );		
 
 		if ( ! isset( $_POST['woocommerce_checkout_update_totals'] ) && wc_notice_count( 'error' ) == 0 ) {
 
 			try {
-
-				prof_flag("Checkout processed 0");
+				
 				// Customer accounts
 				$this->customer_id = apply_filters( 'woocommerce_checkout_customer_id', get_current_user_id() );
 
@@ -621,7 +615,6 @@ class WC_Checkout {
                 	}
 
                 	$this->customer_id = $new_customer;
-prof_flag("Checkout processed 1");
                 	wc_set_customer_auth_cookie( $this->customer_id );
 
                 	// As we are now logged in, checkout will need to refresh to show logged in data
@@ -639,13 +632,11 @@ prof_flag("Checkout processed 1");
 							'display_name' => $this->posted['billing_first_name'] ? $this->posted['billing_first_name'] : ''
                 		);
                 		wp_update_user( apply_filters( 'woocommerce_checkout_customer_userdata', $userdata, $this ) );
-                	}
-                	prof_flag("Checkout processed 2");
+                	}                	
 				}
 
 				// Do a final stock check at this point
-				$this->check_cart_items();
-				prof_flag("Checkout processed 3");
+				$this->check_cart_items();				
 
 				// Abort if errors are present
 				if ( wc_notice_count( 'error' ) > 0 )
@@ -653,13 +644,11 @@ prof_flag("Checkout processed 1");
 
 				$order_id = $this->create_order();
 
-prof_flag("Checkout processed 4");
 				if ( is_wp_error( $order_id ) ) {
 					throw new Exception( $order_id->get_error_message() );
 				}
 
-				do_action( 'woocommerce_checkout_order_processed', $order_id, $this->posted );
-				prof_flag("Checkout processed 5");
+				do_action( 'woocommerce_checkout_order_processed', $order_id, $this->posted );				
 
                 
 				// Process payment
@@ -668,10 +657,8 @@ prof_flag("Checkout processed 4");
 					// Store Order ID in session so it can be re-used after payment failure
 					WC()->session->order_awaiting_payment = $order_id;
 
-					// Process Payment
-					prof_flag("Processing payment - START");
-					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );
-					prof_flag("Processing payment - END");
+					// Process Payment					
+					$result = $available_gateways[ $this->posted['payment_method'] ]->process_payment( $order_id );					
 
 					// Redirect to success/confirmation/payment page
 					if ( $result['result'] == 'success' ) {
@@ -680,7 +667,6 @@ prof_flag("Checkout processed 4");
 
 						$result = apply_filters( 'woocommerce_payment_successful_result', $result, $order_id );
 
-						prof_print();
 						if ( is_ajax() ) {
 							echo '<!--WC_START-->' . json_encode( $result ) . '<!--WC_END-->';
 							exit;
@@ -732,8 +718,7 @@ prof_flag("Checkout processed 4");
 			}
 
 		} // endif
-
-		prof_print();
+		
 		// If we reached this point then there were errors
 		if ( is_ajax() ) {
 
@@ -817,7 +802,6 @@ prof_flag("Checkout processed 4");
 
 			
 			$user_ID = get_current_user_id();
-			get_user_meta( $user_ID, 'billing_firm_data_region', true );
 			
 			switch ( $input ) {
 				case 'billing_firm_data_region' :
