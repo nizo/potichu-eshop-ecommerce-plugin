@@ -32,13 +32,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$companyIcDph = get_post_meta( $order->id, '_billing_ic_dph', true );
 
 				if ($companyName != '')
-					echo '<p><strong>Názov spoločnosti:</strong> ' . $companyName . '</p>';
+					echo '<p><strong>Názov spoločnosti:</strong> ' . $companyName . '</p><br/>';
 				if ($companyIco != '')
-					echo '<p><strong>'.__('IČO').':</strong> ' . $companyIco . '</p>';
+					echo '<p><strong>'.__('IČO').':</strong> ' . $companyIco . '</p><br/>';
 				if ($companyDic != '')
-					echo '<p><strong>'.__('DIČ').':</strong> ' . $companyDic . '</p>';
+					echo '<p><strong>'.__('DIČ').':</strong> ' . $companyDic . '</p><br/>';
 				if ($companyIcDph != '')
-					echo '<p><strong>'.__('ič DPH').':</strong> ' . $companyIcDph . '</p>';
+					echo '<p><strong>'.__('ič DPH').':</strong> ' . $companyIcDph . '</p><br/>';
 			}
 			?>			
 
