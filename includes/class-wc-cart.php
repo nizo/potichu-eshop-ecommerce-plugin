@@ -2096,7 +2096,8 @@ class WC_Cart {
 
 			}
 
-			return apply_filters( 'woocommerce_cart_product_subtotal', $product_subtotal, $_product, $quantity, $this );
+			//return apply_filters( 'woocommerce_cart_product_subtotal', $product_subtotal, $_product, $quantity, $this );
+			return $product_subtotal;
 		}
 
 		/**
