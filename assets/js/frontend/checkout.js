@@ -312,7 +312,7 @@ jQuery( function( $ ) {
 						// Remove old errors
 						$( '.woocommerce-error, .woocommerce-message' ).remove();
 
-						alert('going back');
+						//alert('going back');
 						previous_step();
 
 						
