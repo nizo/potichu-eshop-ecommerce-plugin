@@ -101,10 +101,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 			<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
+			<?php
+			/*
 			<tr class="order-total">
 				<th><?php _e( 'Order Total', 'woocommerce' ); ?></th>
 				<td><?php wc_cart_totals_order_total_html(); ?></td>
 			</tr>
+			*/ ?>
 
 			<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 
@@ -113,8 +116,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<?php do_action( 'woocommerce_review_order_before_payment' ); ?>
 
+	
 	<div id="payment">
 		<?php if ( WC()->cart->needs_payment() ) : ?>
+		<h3 style="padding-left: 0;"><?php _e('Spôsob úhrady', 'woocommerce'); ?></h3>
 		<ul class="payment_methods methods">
 			<?php
 				$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
@@ -158,7 +163,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		</ul>
 		<?php endif; ?>
 
-		<div class="form-row place-order">
+		<div class="form-row">
+
+			<div class="price-subtotal-section">		
+				<div class="price-title"><?php _e( 'Order Total', 'woocommerce' ); ?></div>	
+				<div class="price-subtotal"><span class="amount"><?php echo WC()->cart->get_total(); ?></span> <small>(s DPH)</small></div>
+			</div>
+
+		</div>
+
+		<div class="form-row place-order" style="padding-top: 0;">
 
 			<noscript><?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?><br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php _e( 'Update totals', 'woocommerce' ); ?>" /></noscript>
 
@@ -173,6 +187,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			
 			<div class="checkout-previous-step-button button" id="checkout-previous-step-button" onclick="previous_step();"><?php _e('Naspäť', 'avia_framework'); ?></div>
 			<?php
+			
+			
+			
 			
 			echo apply_filters( 'woocommerce_order_button_html', '<input type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '" />' );
 						

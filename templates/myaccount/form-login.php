@@ -53,9 +53,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p class="form-row">
 				<?php wp_nonce_field( 'woocommerce-login' ); ?>
 				<input type="submit" class="button" name="login" value="<?php _e( 'Login', 'woocommerce' ); ?>" /> 
+				<input type="hidden" name="redirect" value="<?php echo home_url(); ?>" />
+				<!--
 				<label for="rememberme" class="inline">
 					<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
 				</label>
+				-->
 			</p>
 			<p class="lost_password">
 				<a href="<?php echo esc_url( wc_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
@@ -113,7 +116,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php endif; ?>
 
-			<small style="margin: -7px 0 7px 0; display: block;" >Heslo Vám zašleme e-mailom, môžete si ho kedykoľvek zmeniť.</small>
+			<div style="margin: -7px 0 7px 0; display: block;" >Heslo Vám zašleme e-mailom, môžete si ho kedykoľvek zmeniť.</div>
 			<!-- Spam Trap -->			
 			<div style="<?php echo ( ( is_rtl() ) ? 'right' : 'left' ); ?>: -999em; position: absolute;"><label for="trap"><?php _e( 'Anti-spam', 'woocommerce' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
 			

@@ -16,9 +16,15 @@ if ( is_user_logged_in() )
 
 	<?php do_action( 'woocommerce_login_form_start' ); ?>
 
-	<?php if ( $message ) echo wpautop( wptexturize( $message ) ); ?>
+	<?php
+	$containerClass = '';
+		if ( $message ) {
+			echo '<div id="loginIfPossibleParagraph">' . wpautop( wptexturize( $message ) ) . '</div>'; 
+			$containerClass = "hidden";
+		}
+	?>
 
-	<div class="login-checkout-1">
+	<div class="login-checkout-1 <?php echo $containerClass; ?>" id="checkoutLoginSection1">
 		<label >Prihlásiť cez sociálnu sieť</label>	
 			
 		<a class="social" href="<?php echo home_url('/wp-login.php?loginFacebook=1&redirect=') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginFacebook=1&redirect='); ?>'+window.location.href; return false;">						
@@ -30,7 +36,7 @@ if ( is_user_logged_in() )
 		</a>				
 	</div>
 	
-	<div class="login-checkout-2">
+	<div class="login-checkout-2 <?php echo $containerClass; ?>" id="checkoutLoginSection2">
 		<p class="form-row form-row-first">
 			<label for="username"><?php _e( 'Username or email', 'woocommerce' ); ?> <span class="required">*</span></label>
 			<input type="text" class="input-text" name="username" id="username" />
