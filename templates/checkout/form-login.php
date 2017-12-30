@@ -22,7 +22,7 @@ wc_print_notice( $info_message, 'notice' );
 //'message'  => __( 'If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.', 'woocommerce' ),
 	woocommerce_login_form(
 		array(
-			'message'  => __( 'Ak máte na našom portáli konto a želáte si nákup uskutočniť pod ním, prosím, <strong><a href="#" onclick="checkoutShowLoginSection();preventDefaults();">prihláste sa.</a></strong>', 'woocommerce' ),
+			'message'  => __( 'Ak máte na našom portáli konto a želáte si nákup uskutočniť pod ním, prosím, prihláste sa.', 'woocommerce' ),
 			//'message' => printf( esc_html__( 'We deleted %d spam messages.', 'woocommerce' ), $count );,
 			'redirect' => get_permalink( wc_get_page_id( 'checkout' ) ),
 			'hidden'   => false

@@ -2016,17 +2016,21 @@ class WC_Cart {
 
 					$cart_subtotal = wc_price( $this->subtotal_ex_tax );
 
+					/*
 					if ( $this->tax_total > 0 && $this->prices_include_tax ) {
 						$cart_subtotal .= ' <small>' . WC()->countries->ex_tax_or_vat() . '</small>';
 					}
+					*/
 
 				} else {
 
 					$cart_subtotal = wc_price( $this->subtotal );
 
+					/*
 					if ( $this->tax_total > 0 && !$this->prices_include_tax ) {
 						$cart_subtotal .= ' <small>' . WC()->countries->inc_tax_or_vat() . '</small>';
 					}
+					*/
 
 				}
 			}
@@ -2082,9 +2086,11 @@ class WC_Cart {
 					$row_price        = $_product->get_price_including_tax( $quantity );
 					$product_subtotal = wc_price( $row_price );
 
+					/*
 					if ( ! $this->prices_include_tax && $this->tax_total > 0 ) {
 						$product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
 					}
+					*/
 
 				}
 

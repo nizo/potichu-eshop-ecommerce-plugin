@@ -281,9 +281,11 @@ function wc_cart_totals_shipping_method_label( $method ) {
 			}
 		} else {
 			$label .= ': ' . wc_price( $method->cost + $method->get_shipping_tax() );
+			/*
 			if ( $method->get_shipping_tax() > 0 && ! WC()->cart->prices_include_tax ) {
 				$label .= ' <small>' . WC()->countries->inc_tax_or_vat() . '</small>';
 			}
+			*/
 		} 
 	} elseif ( $method->id == 'flat_rate_reg' ) {
 	} elseif ( $method->id !== 'free_shipping' ) {

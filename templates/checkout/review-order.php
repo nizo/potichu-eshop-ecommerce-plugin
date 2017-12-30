@@ -167,7 +167,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 			<div class="price-subtotal-section">		
 				<div class="price-title"><?php _e( 'Order Total', 'woocommerce' ); ?></div>	
-				<div class="price-subtotal"><span class="amount"><?php echo WC()->cart->get_total(); ?></span> <small>(s DPH)</small></div>
+				<div class="price-subtotal"><span class="amount"><?php echo WC()->cart->get_total(); ?></span> <small><?php echo WC()->countries->inc_tax_or_vat(); ?></small></div>
 			</div>
 
 		</div>

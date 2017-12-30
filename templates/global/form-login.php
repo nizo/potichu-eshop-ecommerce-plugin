@@ -17,14 +17,12 @@ if ( is_user_logged_in() )
 	<?php do_action( 'woocommerce_login_form_start' ); ?>
 
 	<?php
-	$containerClass = '';
 		if ( $message ) {
-			echo '<div id="loginIfPossibleParagraph">' . wpautop( wptexturize( $message ) ) . '</div>'; 
-			$containerClass = "hidden";
+			echo '<div style="margin: 12px 0 16px 0;">' . $message . '</div>'; 
 		}
 	?>
 
-	<div class="login-checkout-1 <?php echo $containerClass; ?>" id="checkoutLoginSection1">
+	<div class="login-checkout-1" id="checkoutLoginSection1">
 		<label >Prihlásiť cez sociálnu sieť</label>	
 			
 		<a class="social" href="<?php echo home_url('/wp-login.php?loginFacebook=1&redirect=') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginFacebook=1&redirect='); ?>'+window.location.href; return false;">						
@@ -36,12 +34,12 @@ if ( is_user_logged_in() )
 		</a>				
 	</div>
 	
-	<div class="login-checkout-2 <?php echo $containerClass; ?>" id="checkoutLoginSection2">
-		<p class="form-row form-row-first">
+	<div class="login-checkout-2" id="checkoutLoginSection2">
+		<p class="form-row form-row-first" style="width: 40%; display: inline-block; margin-right: 12px;">
 			<label for="username"><?php _e( 'Username or email', 'woocommerce' ); ?> <span class="required">*</span></label>
 			<input type="text" class="input-text" name="username" id="username" />
 		</p>
-		<p class="form-row form-row-last">
+		<p class="form-row form-row-last" style="width: 40%;  display: inline-block; ">
 			<label for="password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
 			<input class="input-text" type="password" name="password" id="password" />
 		</p>
