@@ -62,7 +62,7 @@ class WC_Frontend_Scripts {
 	public static function load_scripts() {
 		global $post;
 
-		$suffix               = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$suffix               = defined( 'POTICHU_DEBUG' ) && POTICHU_DEBUG ? '' : '.min';
 		$lightbox_en          = get_option( 'woocommerce_enable_lightbox' ) == 'yes' ? true : false;
 		$ajax_cart_en         = get_option( 'woocommerce_enable_ajax_add_to_cart' ) == 'yes' ? true : false;
 		$assets_path          = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
@@ -82,7 +82,7 @@ class WC_Frontend_Scripts {
 
 		// Queue frontend scripts conditionally
 		if ( $ajax_cart_en )
-			wp_enqueue_script( 'wc-add-to-cart', $frontend_script_path . 'add-to-cart' . $suffix . '.js', array( 'jquery' ), WC_VERSION, true );
+			wp_enqueue_script( 'wc-add-to-cart', $frontend_script_path . 'add-to-cart.js', array( 'jquery' ), WEB_VERSION, true );
 
 		if ( is_cart() )
 			wp_enqueue_script( 'wc-cart', $frontend_script_path . 'cart' . $suffix . '.js', array( 'jquery', 'wc-country-select' ), WC_VERSION, true );

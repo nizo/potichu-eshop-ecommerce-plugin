@@ -91,12 +91,23 @@ class WC_AJAX {
 
 		$mini_cart = ob_get_clean();
 
+		
+		$totalPrice = WC()->cart->cart_contents_total + WC()->cart->tax_total;		
+		
+		/*
+		$totalPrice = round($totalPrice, 2);
+		$totalPrice = $totalPrice . ' ' . get_woocommerce_currency_symbol();
+		*/
+		
+		$totalPrice = wc_price($totalPrice, array('noHtml' => true));
+		
 		// Fragments and mini cart are returned
 		$data = array(
 			'fragments' => apply_filters( 'add_to_cart_fragments', array(
 					'div.widget_shopping_cart_content' => '<div class="widget_shopping_cart_content">' . $mini_cart . '</div>'
 				)
 			),
+			'cart_price' => $totalPrice,
 			'cart_hash' => WC()->cart->get_cart() ? md5( json_encode( WC()->cart->get_cart() ) ) : ''
 		);
 

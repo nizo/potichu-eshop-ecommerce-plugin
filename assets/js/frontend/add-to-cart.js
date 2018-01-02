@@ -54,6 +54,7 @@ jQuery( function( $ ) {
 
 					fragments = response.fragments;
 					cart_hash = response.cart_hash;
+					cart_price = response.cart_price;
 
 					// Block fragments class
 					if ( fragments ) {
@@ -79,6 +80,10 @@ jQuery( function( $ ) {
 						$.each( fragments, function( key, value ) {
 							$( key ).replaceWith( value );
 						});
+					}
+
+					if (cart_price) {
+						$('.cart_dropdown .cart_subtotal .amount').html(cart_price);
 					}
 
 					// Unblock

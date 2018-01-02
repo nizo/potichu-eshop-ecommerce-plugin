@@ -312,9 +312,10 @@ function get_woocommerce_price_format() {
  * @param array $args (default: array())
  * @return string
  */
-function wc_price( $price, $args = array() ) {
+function wc_price( $price, $args = array()) {
 	extract( shortcode_atts( array(
-		'ex_tax_label' 	=> '0'
+		'ex_tax_label' 	=> '0',
+		'noHtml' => false
 	), $args ) );
 
 	$return          = '';
@@ -341,8 +342,13 @@ function wc_price( $price, $args = array() ) {
 		$price = wc_trim_zeros( $price );
 	}
 	*/
-
+	
 	$formatted_price = ( $negative ? '-' : '' ) . sprintf( get_woocommerce_price_format(), $currency_symbol, $price );
+
+	if ($noHtml) { 
+		return $formatted_price;
+	}
+	
 	$return          = '<span class="amount">' . $formatted_price . '</span>';
 
 	if ( $ex_tax_label && get_option( 'woocommerce_calc_taxes' ) == 'yes' ) {
