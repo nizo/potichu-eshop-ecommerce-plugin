@@ -4,7 +4,7 @@
   "description": "Repository of custom tailored ecommerce plugin solution. www.potichu.sk\r =======\r Repository of custom tailored ecommerce plugin solution.",
   "main": "gulpfile.js",
   "dependencies": {},
-  "devDependencies": {    
+  "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat-css": "^2.3.0",
     "gulp-minify-css": "^1.2.4",

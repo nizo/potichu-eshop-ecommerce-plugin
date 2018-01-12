@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <div>	
 
 	<div class="price-subtotal-section">
-		<div class="price-title"><?php _e( 'Cart Totals', 'woocommerce' ); ?></div>	
+		<div class="price-title"><?php _e( 'Cart Value Totals', 'woocommerce' ); ?></div>	
 		<div class="price-subtotal">
 			<?php 
 				wc_cart_totals_subtotal_html();
