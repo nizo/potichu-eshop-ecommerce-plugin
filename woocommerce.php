@@ -82,6 +82,13 @@ final class WooCommerce {
 	public $order_factory = null;
 
 	/**
+	 * Structured data instance.
+	 *
+	 * @var WC_Structured_Data
+	 */
+	public $structured_data = null;
+
+	/**
 	 * Main WooCommerce Instance
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
@@ -316,6 +323,7 @@ final class WooCommerce {
 		include_once( 'includes/class-wc-customer.php' );                       // Customer class
 		include_once( 'includes/class-wc-shortcodes.php' );                     // Shortcodes class
 		include_once( 'includes/class-wc-https.php' );                          // https Helper
+		include_once( 'includes/class-wc-structured-data.php' );  				// Structured Data class.
 	}
 
 	/**
@@ -361,6 +369,7 @@ final class WooCommerce {
 		$this->order_factory   = new WC_Order_Factory();                        // Order Factory to create new order instances
 		$this->countries       = new WC_Countries();                            // Countries class
 		$this->integrations    = new WC_Integrations();                         // Integrations class
+		$this->structured_data = new WC_Structured_Data(); 						// Structured Data class, generates and handles structured data.
 
 		// Classes/actions loaded for the frontend and for ajax requests
 		if ( ! is_admin() || defined( 'DOING_AJAX' ) ) {

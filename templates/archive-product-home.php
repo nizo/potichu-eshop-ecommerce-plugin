@@ -11,7 +11,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-get_header(); ?>
+get_header();
+
+do_action( 'woocommerce_before_main_content' );?>
 
 	<div class='container_wrap container_wrap_first main_color'>
 		<div class='container'>
