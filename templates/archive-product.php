@@ -29,23 +29,7 @@ get_header( 'shop' ); ?>
 
 		<?php endif; ?>
 
-		<?php do_action( 'woocommerce_archive_description' ); ?>
-		
-		<?php 
-
-
-$frontpage_id = get_option( 'page_on_front' );
-$includecontent = apply_filters('avia_builder_precompile', get_post_meta($frontpage_id, '_aviaLayoutBuilderCleanData', true));
-$includecontent = apply_filters('the_content', $includecontent);
-$includecontent = apply_filters('avf_template_builder_content', $includecontent);
-echo $includecontent;
-echo '<div style="clear:both;"></div>';
-
-
-		?>
-
-
-		
+		<?php do_action( 'woocommerce_archive_description' ); ?>			
 
 		<?php if ( have_posts() ) : ?>
 
