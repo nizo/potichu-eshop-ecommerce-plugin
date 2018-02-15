@@ -1,6 +1,20 @@
-jQuery( function( $ ) {
+function previous_step() {	
+	jQuery( "#checkout-step-1" ).show();
+	jQuery( "#checkout-step-2" ).hide();
 
+	jQuery( ".entry-content-wrapper form.login" ).show();	
+	jQuery( "#checkout-step-indicator-1" ).toggleClass('current');
+	jQuery( "#checkout-step-indicator-2" ).toggleClass('current');
+}
+
+jQuery( function( $ ) {	
+	
 	$.blockUI.defaults.overlayCSS.cursor = 'default';
+		
+	jQuery( "#ship-to-different-address-checkbox-mockup" ).click(function() {		
+		jQuery('#ship-to-different-address-checkbox').click();
+	});
+	
 
 	// wc_checkout_params is required to continue, ensure the object exists
 	if ( typeof wc_checkout_params === 'undefined' )
@@ -27,12 +41,14 @@ jQuery( function( $ ) {
 			city			= $( '#billing_city' ).val(),
 			address			= $( 'input#billing_address_1' ).val(),
 			address_2		= $( 'input#billing_address_2' ).val(),
+			billing_region	= $( '#billing_region ' ).val(),
 			s_country,
 			s_state,
 			s_postcode,
 			s_city,
 			s_address,
-			s_address_2;
+			s_address_2,
+			shipping_region;
 
 		if ( $( '#ship-to-different-address input' ).is( ':checked' ) ) {
 			s_country		= $( '#shipping_country' ).val();
@@ -41,6 +57,7 @@ jQuery( function( $ ) {
 			s_city			= $( '#shipping_city' ).val();
 			s_address		= $( 'input#shipping_address_1' ).val();
 			s_address_2		= $( 'input#shipping_address_2' ).val();
+			shipping_region	= $( '#shipping_region' ).val();
 		} else {
 			s_country		= country;
 			s_state			= state;
@@ -48,6 +65,7 @@ jQuery( function( $ ) {
 			s_city			= city;
 			s_address		= address;
 			s_address_2		= address_2;
+			shipping_region	= billing_region;
 		}
 
 		$( '#order_methods, #order_review' ).block({ message: null, overlayCSS: { background: '#fff url(' + wc_checkout_params.ajax_loader_url + ') no-repeat center', backgroundSize: '16px 16px', opacity: 0.6 } });
@@ -63,12 +81,14 @@ jQuery( function( $ ) {
 			city:						city,
 			address:					address,
 			address_2:					address_2,
+			billing_region:				billing_region,
 			s_country:					s_country,
 			s_state:					s_state,
 			s_postcode:					s_postcode,
 			s_city:						s_city,
 			s_address:					s_address,
 			s_address_2:				s_address_2,
+			shipping_region:			shipping_region,
 			post_data:					$( 'form.checkout' ).serialize()
 		};
 
@@ -161,6 +181,8 @@ jQuery( function( $ ) {
 
 	// Used for input change events below
 	function input_changed() {
+		return;
+		
 		var update_totals = true;
 
 		if ( $( dirtyInput ).size() ) {
@@ -184,28 +206,52 @@ jQuery( function( $ ) {
 	}
 
 	$( 'form.checkout' )
-
+	
+	/*
+	.on( 'click', '#checkout-next-step-button', function() {	
+	
+		return;
+		//var ship_to_different_address =jQuery( '#ship-to-different-address-checkbox' ).prop('checked');	
+		console.log('im in');		
+		
+		var data = {
+			type:	'POST',
+			action: 'woocommerce_update_regions',			
+			shipping_region: jQuery( '#shipping_region' ).val(),
+			billing_region: jQuery( '#billing_region' ).val(),
+			ship_to_different_address: jQuery( '#ship-to-different-address-checkbox' ).prop('checked')
+		};
+				
+		jQuery.post( wc_add_to_cart_params.ajax_url, data, function( response ) {			
+			clearTimeout( updateTimer );
+			dirtyInput = false;
+			$( 'body' ).trigger( 'update_checkout' );
+		});			
+	})
+	*/
+	
 	/* Update totals/taxes/shipping */
-	// Inputs/selects which update totals instantly
-	.on( 'input change', 'select.shipping_method, input[name^=shipping_method], #ship-to-different-address input, .update_totals_on_change select, .update_totals_on_change input[type=radio]', function() {
+	// Inputs/selects which update totals instantly	
+	.on( 'input change', 'select.shipping_method, input[name^=shipping_method], #ship-to-different-address input, .update_totals_on_change select, .update_totals_on_change input[type=radio]', function() {		
 		clearTimeout( updateTimer );
 		dirtyInput = false;
 		$( 'body' ).trigger( 'update_checkout' );
 	})
 
 	// Address-fields which refresh totals when all required fields are filled
-	.on( 'change', '.address-field input.input-text, .update_totals_on_change input.input-text', function() {
+	.on( 'change', '.address-field input.input-text, .update_totals_on_change input.input-text', function() {		
 		if ( dirtyInput ) {
 			input_changed();
 		}
 	})
 
-	.on( 'input change', '.address-field select', function() {
+	.on( 'input change', '.address-field select', function() {		
 		dirtyInput = this;
 		input_changed();
 	})
 
 	.on( 'input keydown', '.address-field input.input-text, .update_totals_on_change input.input-text', function( e ){
+		
 		var code = e.keyCode || e.which || 0;
 
 		if ( code === 9 ) {
@@ -271,10 +317,19 @@ jQuery( function( $ ) {
 				$form.block({ message: null, overlayCSS: { background: '#fff url(' + wc_checkout_params.ajax_loader_url + ') no-repeat center', backgroundSize: '16px 16px', opacity: 0.6 } });
 			}
 
+			var processed_data;
+
+			if (!jQuery('#billing_firm_data_region_field input').is(':checked')) {
+				processed_data = $form.find(':not(#billing_firm_data_region_field input)').serialize();
+			} else {
+				processed_data = $form.serialize()
+			}
+
+
 			$.ajax({
 				type:		'POST',
 				url:		wc_checkout_params.checkout_url,
-				data:		$form.serialize(),
+				data:		processed_data,
 				success:	function( code ) {
 					var result = '';
 
@@ -312,10 +367,6 @@ jQuery( function( $ ) {
 						// Remove old errors
 						$( '.woocommerce-error, .woocommerce-message' ).remove();
 
-						//alert('going back');
-						previous_step();
-
-						
 						// Add new errors
 						if ( result.messages ) {
 							$form.prepend( result.messages );
@@ -349,6 +400,96 @@ jQuery( function( $ ) {
 		return false;
 	});
 
+	
+	/* NIZO */
+	
+	jQuery( "#checkout-next-step-button" ).click(function() {
+		
+		console.log('hello');
+
+		jQuery( ".entry-content-wrapper form.login" ).hide();
+	
+		var $form = $( 'form.checkout' );		
+		validateURL = avia_framework_globals.ajaxurl + '?action=woocommerce_validate_user_data';
+		
+		
+		dataAltered = $form.serialize(),
+		dataAltered += '&validate_only=true';
+		
+		$.ajax({
+			type:		'POST',
+			url:		validateURL,
+			data:		dataAltered,
+			success:	function( code ) {
+											
+				var result = '';				
+				try {
+					//console.log(code);				
+					// Get the valid JSON only from the returned string
+					if ( code.indexOf( '<!--WC_START-->' ) >= 0 )
+						code = code.split( '<!--WC_START-->' )[1]; // Strip off before after WC_START
+
+					if ( code.indexOf( '<!--WC_END-->' ) >= 0 )
+						code = code.split( '<!--WC_END-->' )[0]; // Strip off anything after WC_END
+					
+					result = $.parseJSON( code );
+					var message = (result.messages);
+					var liCount = (message.match(/<li>/g) || []).length;															
+					var proceedToNextStep = ((liCount == 1 ) && (message.indexOf("Besteron") > -1));					
+					
+					if ((result.result === 'validated') || proceedToNextStep) {
+					
+						jQuery( '.woocommerce-error, .woocommerce-message' ).remove();
+						jQuery( "#checkout-step-1" ).hide();
+						jQuery( "#checkout-step-2" ).show();
+						
+						jQuery( "#checkout-step-indicator-1" ).toggleClass('current');
+						jQuery( "#checkout-step-indicator-2" ).toggleClass('current');
+						
+						//jQuery.ajax( $fragment_refresh );
+						
+						$( 'body' ).trigger( 'update_checkout' );
+
+					} else if ( result.result === 'failure' ) {
+						throw 'Result failure';
+					} else {
+						throw 'Invalid response';
+					}
+				}
+
+				catch( err ) {
+
+					if ( result.reload === 'true' ) {
+						window.location.reload();
+						return;
+					}
+					
+					$( '.woocommerce-error, .woocommerce-message' ).remove();
+					
+					if ( result.messages ) {
+						$form.prepend( result.messages );
+					} else {
+						$form.prepend( code );
+					}
+
+					$( 'html, body' ).animate({
+						scrollTop: ( $( 'form.checkout' ).offset().top - 100 )
+					}, 1000 );
+					
+					if ( result.refresh === 'true' )
+						$( 'body' ).trigger( 'update_checkout' );
+
+					$( 'body' ).trigger( 'checkout_error' );
+				}
+			},
+			dataType: 'html'
+		});	
+		return false;		
+	});
+	
+	/* NIZO END */
+	
+	
 	/* AJAX Coupon Form Submission */
 	$( 'form.checkout_coupon' ).submit( function() {
 		var $form = $( this );

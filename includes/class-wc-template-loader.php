@@ -62,12 +62,23 @@ class WC_Template_Loader {
 
 		} elseif (is_page( wc_get_page_id( 'shop' ) ) ) {
 
-			$file 	= 'archive-product-home.php';
+			
+			
+			if (potichu_is_beta_version())
+				$file 	= 'archive-product-home.php';
+			else
+				$file 	= 'archive-product.php';
+			
 			$find[] = $file;
 			$find[] = WC()->template_path() . $file;
 		
 		} elseif ( is_post_type_archive( 'product' )) {
-			$file 	= 'archive-product-home.php';
+			
+			if (potichu_is_beta_version())
+				$file 	= 'archive-product-home.php';
+			else
+				$file 	= 'archive-product.php';
+			
 			$find[] = $file;
 			$find[] = WC()->template_path() . $file;
 		}

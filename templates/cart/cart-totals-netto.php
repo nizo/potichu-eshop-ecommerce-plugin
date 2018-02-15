@@ -14,10 +14,19 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<div class="price-subtotal-section">
 		<div class="price-title"><?php _e( 'Cart Value Totals', 'woocommerce' ); ?></div>	
 		<div class="price-subtotal">
-			<?php 
+			
+			
+			<span class="amount"><?php echo WC()->cart->get_total(); ?></span> <?php echo WC()->countries->inc_tax_or_vat(); ?>
+			<?php
+				$discount = WC()->cart->get_total_discount(); 
+				if ($discount != false) {
+					echo '<div class="cart-discount-value">' . __('So zľavou:', 'woocommerce') . ' ' . $discount . '</div>';
+				}				
+			?>
+			<!--
 				wc_cart_totals_subtotal_html();
 				echo ' ' . WC()->countries->inc_tax_or_vat();
-			?>
+			-->
 		</div>
 	</div>				
 	<small class="cart-shipping-in-next-step">

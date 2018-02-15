@@ -99,7 +99,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<td class="product-subtotal">
 						<?php
 							//echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key );
-							echo  WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] );
+							echo WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] );
 						?>
 					</td>
 				</tr>
@@ -110,18 +110,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 		do_action( 'woocommerce_cart_contents' );
 		?>
 		<tr>
-			<td colspan="6" class="actions">
-
-				<?php if ( WC()->cart->coupons_enabled() ) { ?>
-					<div class="coupon">
-
-						<label for="coupon_code"><?php _e( 'Coupon', 'woocommerce' ); ?>:</label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php _e( 'Coupon code', 'woocommerce' ); ?>" /> <input type="submit" class="button" name="apply_coupon" value="<?php _e( 'Apply Coupon', 'woocommerce' ); ?>" />
-
-						<?php do_action('woocommerce_cart_coupon'); ?>
-
-					</div>
-				<?php } ?>
-												
+			<td colspan="6" class="actions">															
 				<div class="cart-meta-sumary"><?php _e('Rozmer dodávky:', 'woocommerce'); ?> <span><?php echo get_package_dimensions(WC()->cart->get_cart()); ?> m<sup>3</sup></span></br><?php _e('Hmotnosť dodávky:', 'woocommerce'); ?> <span><?php echo WC()->cart->cart_contents_weight; ?> kg</span></div>
 				
 				<a href="<?php echo home_url(); ?>" class="keep-shopping"><?php _e('Späť do obchodu', 'woocommerce'); ?></a>
@@ -141,7 +130,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 <?php do_action( 'woocommerce_after_cart_table' ); ?>
 
-</form>
+
 
 <div class="cart-collaterals">
 
@@ -152,5 +141,17 @@ do_action( 'woocommerce_before_cart' ); ?>
 	<?php woocommerce_shipping_calculator(); ?>
 
 </div>
+
+<?php if ( WC()->cart->coupons_enabled() ) { ?>
+	<div class="coupon">
+
+		<!--<label for="coupon_code"><?php _e( 'Coupon', 'woocommerce' ); ?>:</label>-->
+		<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php _e( 'Coupon code', 'woocommerce' ); ?>" /> <input type="submit" class="button" name="apply_coupon" value="<?php _e( 'Apply Coupon', 'woocommerce' ); ?>" />
+		<?php do_action('woocommerce_cart_coupon'); ?>
+
+	</div>
+<?php } ?>
+
+</form>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>

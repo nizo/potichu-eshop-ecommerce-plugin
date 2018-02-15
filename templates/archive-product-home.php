@@ -16,8 +16,7 @@ get_header();
 do_action( 'woocommerce_before_main_content' );?>
 
 	<div class='container_wrap container_wrap_first main_color'>
-		<div class='container'>
-			<main class='template-page content ' <?php avia_markup_helper(array('context' => 'content','post_type'=>'page'));?> style="padding-top: 0;">
+			<main class="">
 
 <?php
 
@@ -75,7 +74,6 @@ endforeach;
 
 </main>
 
-</div>
 
 </div>
 
