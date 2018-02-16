@@ -185,7 +185,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			
 			?>
 			
-			<div class="checkout-previous-step-button button" id="checkout-previous-step-button" onclick="previous_step();"><?php _e('Naspäť', 'avia_framework'); ?></div>
+			<div class="checkout-previous-step-button button" id="checkout-previous-step-button" onclick="checkoutGoBack()"><?php _e('Naspäť', 'avia_framework'); ?></div>
 			<?php
 			
 			

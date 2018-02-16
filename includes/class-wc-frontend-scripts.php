@@ -80,12 +80,16 @@ class WC_Frontend_Scripts {
 		wp_register_script( 'wc-address-i18n', $frontend_script_path . 'address-i18n' . $suffix . '.js', array( 'jquery' ), WC_VERSION, true );
 		wp_register_script( 'jquery-cookie', $assets_path . 'js/jquery-cookie/jquery.cookie' . $suffix . '.js', array( 'jquery' ), '1.3.1', true );
 
-		// Queue frontend scripts conditionally
+		// Queue frontend scripts conditionally			
 		if ( $ajax_cart_en )
 			wp_enqueue_script( 'wc-add-to-cart', $frontend_script_path . 'add-to-cart.js', array( 'jquery' ), WEB_VERSION, true );
+	
 
+		/*
+		//cart.js contains only logic that handles shipping estimation... not needed
 		if ( is_cart() )
 			wp_enqueue_script( 'wc-cart', $frontend_script_path . 'cart' . $suffix . '.js', array( 'jquery', 'wc-country-select' ), WC_VERSION, true );
+		*/
 
 		if ( is_checkout() ) {
 

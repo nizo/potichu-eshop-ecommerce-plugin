@@ -64,7 +64,7 @@ class WC_Template_Loader {
 
 			
 			
-			if (potichu_is_beta_version())
+			if (get_option('use_new_frontpage_layout', false))
 				$file 	= 'archive-product-home.php';
 			else
 				$file 	= 'archive-product.php';
@@ -74,7 +74,7 @@ class WC_Template_Loader {
 		
 		} elseif ( is_post_type_archive( 'product' )) {
 			
-			if (potichu_is_beta_version())
+			if (get_option('use_new_frontpage_layout', false))
 				$file 	= 'archive-product-home.php';
 			else
 				$file 	= 'archive-product.php';

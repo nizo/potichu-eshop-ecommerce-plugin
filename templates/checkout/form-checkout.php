@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 wc_print_notices();
 
-//do_action( 'woocommerce_before_checkout_form', $checkout );
+do_action( 'woocommerce_before_checkout_form', $checkout );
 woocommerce_checkout_login_form();
 
 

@@ -385,7 +385,7 @@ class WC_Form_Handler {
 
 			WC()->cart->set_quantity( $_GET['remove_item'], 0 );
 
-			wc_add_notice( __( 'Cart updated.', 'woocommerce' ) );
+			//wc_add_notice( __( 'Cart updated.', 'woocommerce' ) );
 
 			$referer = wp_get_referer() ? remove_query_arg( array( 'add-to-cart', 'remove_item' ), wp_get_referer() ) : WC()->cart->get_cart_url();
 			wp_safe_redirect( $referer );
@@ -444,7 +444,7 @@ class WC_Form_Handler {
 				wp_safe_redirect( WC()->cart->get_checkout_url() );
 				exit;
 			} elseif ( $cart_updated ) {
-				wc_add_notice( __( 'Cart updated.', 'woocommerce' ) );
+				//wc_add_notice( __( 'Cart updated.', 'woocommerce' ) );
 				$referer = remove_query_arg( 'remove_coupon', ( wp_get_referer() ? wp_get_referer() : WC()->cart->get_cart_url() ) );
 				wp_safe_redirect( $referer );
 				exit;

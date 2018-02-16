@@ -173,7 +173,12 @@ add_filter( 'woocommerce_product_tabs', 'woocommerce_sort_product_tabs', 99 );
  * @see woocommerce_order_review()
  */
 add_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
-add_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+//add_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
+//display coupons at the bottom in checkout page
+//add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
+
 add_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
 
 /**

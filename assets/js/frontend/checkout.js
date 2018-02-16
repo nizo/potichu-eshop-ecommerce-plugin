@@ -1,13 +1,13 @@
-function previous_step() {	
+function checkoutGoBack() {	
 	jQuery( "#checkout-step-1" ).show();
 	jQuery( "#checkout-step-2" ).hide();
 
 	jQuery( ".entry-content-wrapper form.login" ).show();	
 	jQuery( "#checkout-step-indicator-1" ).toggleClass('current');
 	jQuery( "#checkout-step-indicator-2" ).toggleClass('current');
+		
 }
-
-jQuery( function( $ ) {	
+	jQuery( function( $ ) {	
 	
 	$.blockUI.defaults.overlayCSS.cursor = 'default';
 		
@@ -121,6 +121,7 @@ jQuery( function( $ ) {
 		return false;
 	});
 
+	/*
 	$( 'a.showcoupon' ).click( function() {
 		$( '.checkout_coupon' ).slideToggle( 400, function() {
 			$( '#coupon_code' ).focus();
@@ -128,6 +129,7 @@ jQuery( function( $ ) {
 
 		return false;
 	});
+	*/
 
 	$( '#ship-to-different-address input' ).change( function() {
 		$( 'div.shipping_address' ).hide();
@@ -403,11 +405,11 @@ jQuery( function( $ ) {
 	
 	/* NIZO */
 	
-	jQuery( "#checkout-next-step-button" ).click(function() {
-		
-		console.log('hello');
+	
 
-		jQuery( ".entry-content-wrapper form.login" ).hide();
+	
+	jQuery( "#checkout-next-step-button" ).click(function() {		
+
 	
 		var $form = $( 'form.checkout' );		
 		validateURL = avia_framework_globals.ajaxurl + '?action=woocommerce_validate_user_data';
@@ -447,6 +449,9 @@ jQuery( function( $ ) {
 						jQuery( "#checkout-step-indicator-2" ).toggleClass('current');
 						
 						//jQuery.ajax( $fragment_refresh );
+											
+						
+						jQuery( ".entry-content-wrapper form.login" ).hide();
 						
 						$( 'body' ).trigger( 'update_checkout' );
 

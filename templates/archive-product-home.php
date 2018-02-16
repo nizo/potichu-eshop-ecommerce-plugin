@@ -15,8 +15,9 @@ get_header();
 
 do_action( 'woocommerce_before_main_content' );?>
 
-	<div class='container_wrap container_wrap_first main_color'>
-			<main class="">
+
+	
+
 
 <?php
 
@@ -70,12 +71,14 @@ foreach( $prod_categories as $prod_cat ) :
 		//echo '<div class="category-divider"></div>';
 	endif;
 endforeach;	
+
+do_action( 'woocommerce_after_main_content' );
 ?>
 
-</main>
 
 
-</div>
+
 
 <?php
-get_footer(); ?>
+get_footer();
+?>
