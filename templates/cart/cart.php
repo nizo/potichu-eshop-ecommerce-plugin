@@ -142,12 +142,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 </div>
 
-
-
-
 </form>
 
-<?php do_action( 'woocommerce_after_cart' ); ?>
-
-
 <?php woocommerce_checkout_coupon_form(); ?>
+
+<?php do_action( 'woocommerce_after_cart' ); ?>
