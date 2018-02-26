@@ -8,19 +8,28 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
-<?php do_action( 'woocommerce_email_header', $email_heading ); ?>
-
 
 <?php
+
 $shipping_methods = $order->get_shipping_methods();
  
 foreach ( $shipping_methods as $shipping ) {
 	$shippingID = ($shipping['item_meta']['method_id'][0]);		
 }
 
-if ($shippingID != 'flat_rate_reg') { ?>
+$potichu_courier_chosen = ($shippingID == 'flat_rate_reg');
+$email_heading = ($potichu_courier_chosen ? 'Objednávka pripravená na odoslanie' : 'Objednávka pripravená od <strong>nasledujúceho dňa</strong> na vyzdvihnutie');
+
+?>
+<?php $email_heading = 'Objednávka pripravená na odoslanie'; ?>
+<?php do_action( 'woocommerce_email_header', $email_heading ); ?>
+
+
+<?php
+
+if (!$potichu_courier_chosen) { ?>
 	<p>
-	Vaša objednávka je od nasledujúceho pracovného dňa pripravená na osobný odber v&nbsp;<a href="http://www.potichu.sk/kontakt/#warehouse-location" target="_blank">našom sklade</a>. <br><br>
+	Vaša objednávka je od <strong>nasledujúceho pracovného dňa</strong> pripravená na osobný odber v&nbsp;<a href="http://www.potichu.sk/kontakt/#warehouse-location" target="_blank">našom sklade</a>. <br><br>
 
 	<b>Telefónny kontakt na sklad:</b><br> <a href="tel:+421 907 720 886">+421 907 720 886</a>
 
@@ -35,7 +44,7 @@ if ($shippingID != 'flat_rate_reg') { ?>
 		<li>Piatok 7:00 – 11:30 12:30 – 16:00</li>
 	</ul>
 	<br>
-	Prosíme o vyzdvihnutie tovaru do 10-tich pracovných dní.
+	<strong>Prosíme o vyzdvihnutie tovaru do 10-tich pracovných dní.</strong>
 
 	Ďakujeme Vám za prejavenú dôveru a veríme, že sa na nás v budúcnosti znovu obrátite.
 
@@ -44,8 +53,8 @@ if ($shippingID != 'flat_rate_reg') { ?>
 
 <? } else { ?>
 	<p>	
-	Vaša objednávka je skompletizovaná a pripravená na expedíciu, očakávajte zásielku kuriérom v priebehu nasledujúcich dvoch až troch pracovných dní.<br><br>	
-	<b>Ak ste zvolili platbu dobierkou, momentálne je možná iba platba kuriérovi v&nbsp;hotovosti.</b><br><br>	
+	Vaša objednávka je skompletizovaná a pripravená na expedíciu, <strong>očakávajte zásielku kuriérom v priebehu nasledujúcich dvoch až troch pracovných dní.</strong><br><br>	
+	Ak ste zvolili platbu dobierkou, momentálne je možná iba platba kuriérovi <strong>v&nbsp;hotovosti.</strong><br><br>	
 		
 	Ďakujeme Vám za prejavenú dôveru a veríme, že sa na nás v budúcnosti znovu obrátite.
 

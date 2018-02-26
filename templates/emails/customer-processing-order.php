@@ -9,13 +9,19 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
+
+<?php 
+if ($paymentType == 'bacs') {
+	$email_heading = __('Ďakujeme za Vašu objednávku, čakáme na úhradu', 'woocommerce');
+}
+?>
 <?php do_action('woocommerce_email_header', $email_heading); ?>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); 
 
 $paymentType = get_post_meta( $order->id, '_payment_method', true );
 if ($paymentType == 'besteron') {
-	_e('<p>Vašu objednávku začíname spracovávať, o jej skompletizovaní Vás budeme informovať emailom. V prípade akýchkoľvek otázok nás určite kontaktujte na <a target="_blank" href="http://www.potichu.sk/kontakt">www.potichu.sk/kontakt</a>.<p>','woocomemrce');
+	_e('<p>Vašu objednávku <strong>začíname spracovávať</strong>, o jej skompletizovaní Vás </strong>budeme informovať ďalším emailom</strong>. V prípade akýchkoľvek otázok nás určite kontaktujte na <a target="_blank" href="http://www.potichu.sk/kontakt">www.potichu.sk/kontakt</a>.<p>','woocomemrce');
 }
 else if ($paymentType == 'bacs') {
 	$bacs = new WC_Gateway_BACS();
