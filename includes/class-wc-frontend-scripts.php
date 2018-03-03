@@ -98,7 +98,7 @@ class WC_Frontend_Scripts {
 				wp_enqueue_style( 'woocommerce_chosen_styles', $assets_path . 'css/chosen.css' );
 			}
 
-			wp_enqueue_script( 'wc-checkout', $frontend_script_path . 'checkout' . $suffix . '.js', array( 'jquery', 'woocommerce', 'wc-country-select', 'wc-address-i18n' ), WC_VERSION, true );
+			wp_enqueue_script( 'wc-checkout', $frontend_script_path . 'checkout' . $suffix . '.js', array( 'jquery', 'woocommerce', 'wc-country-select', 'wc-address-i18n' ), WEB_VERSION, true );
 		}
 
 		if ( is_page( get_option( 'woocommerce_myaccount_page_id' ) ) ) {
