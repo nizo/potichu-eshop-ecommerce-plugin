@@ -30,4 +30,15 @@ gulp.task('minify-js', function () {
     .pipe(gulp.dest('./assets/js/jquery-cookie/'));
 });
 
+
+gulp.task('minify-js', function () {
+     gulp.src(['./assets/js/frontend/*.js','!./assets/js/frontend/*.min.js'])
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./assets/js/frontend/'));
+});
+
+
 gulp.task('default', ['minify-js']);

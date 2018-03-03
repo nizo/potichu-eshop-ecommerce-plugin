@@ -66,8 +66,6 @@ class WC_Email_New_Order extends WC_Email {
 	 * @return void
 	 */
 	function trigger( $order_id ) {
-
-		potichu_log('triggered within mail');
 	
 		if ( $order_id ) {
 			$this->object 		= wc_get_order( $order_id );
