@@ -58,7 +58,7 @@ if (!$potichu_courier_chosen) {
 	<p>
 	Vaše objednávka je <strong>od následujícího pracovního dne</strong> připravena k osobnímu odběru v <a href="https://www.potichu.cz/kontakt/#warehouse-location" target="_blank">našem skladu v budově Toptrans (Kolín)</a> (kont. osoba p. Bylina)"<br><br>	
 
-	<b>Telefonní  kontakt:</b><br> <a href="tel:+420 728 060 775">+420 728 060 775</a>
+	<b>Telefonní  kontakt:</b><br> <a href="tel:+420731979333">+420 731 979 333</a>
 
 	<br><br>
 
