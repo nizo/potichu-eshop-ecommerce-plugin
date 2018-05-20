@@ -25,11 +25,13 @@ if ( is_user_logged_in() )
 	<div class="login-checkout-1" id="checkoutLoginSection1">
 		<label >Prihlásiť cez sociálnu sieť</label>	
 			
-		<a class="social" href="<?php echo home_url('/wp-login.php?loginFacebook=1&redirect=') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginFacebook=1&redirect='); ?>'+window.location.href; return false;">						
+		<!--<a class="social" href="<?php echo home_url('/wp-login.php?loginFacebook=1&redirect=') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginFacebook=1&redirect='); ?>'+window.location.href; return false;">-->
+		<a class="social" href="<?php echo home_url('/wp-login.php?loginSocial=facebook'); ?>" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="facebook" data-popupwidth="475" data-popupheight="175">
 			<div class="facebook"></div>
 		</a>				
 		
-		<a class="social" href="<?php echo home_url('/wp-login.php?loginGoogle=1&redirect=') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginGoogle=1&redirect='); ?>'+window.location.href; return false;">						
+		<!--<a class="social" href="<?php echo home_url('/wp-login.php?loginSocial=google') . home_url(); ?>" onclick="window.location = '<?php echo home_url('/wp-login.php?loginGoogle=1&redirect='); ?>'+window.location.href; return false;">-->
+		<a class="social" href="<?php echo home_url('/wp-login.php?loginSocial=google'); ?>" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
 			<div class="google"></div>
 		</a>				
 	</div>
