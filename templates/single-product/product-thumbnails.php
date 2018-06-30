@@ -54,9 +54,7 @@ if ( $attachment_ids ) {
 			$image_title = esc_attr(get_post_field('post_content', $attachment_id));
 
 
-			if ($loop == 5) {
-				//$image = esc_attr('<div>+ ' .  . '</div>');				
-
+			if (($loop == 5) && (count($attachment_ids) > 5)) {
 				$text = '+' . (count($attachment_ids) - $loop);
 				$image = '<div class="remaining-gallery-images-count">' . $text . '</div>';
 			}
