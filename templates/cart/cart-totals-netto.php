@@ -16,7 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<div class="price-subtotal">
 			
 			
-			<span class="amount"><?php echo WC()->cart->get_total(); ?></span> <?php echo WC()->countries->inc_tax_or_vat(); ?>
+			<span class="amount">
+				<?php wc_cart_totals_subtotal_html(); ?>
+			</span>
+			<?php echo WC()->countries->inc_tax_or_vat();?>
+			
 			<?php
 				/*
 				$discount = WC()->cart->get_total_discount(); 

@@ -429,7 +429,7 @@ class WC_Post_types {
 			'show_in_admin_status_list' => true,
 			'label_count'               => _n_noop( 'Cancelled <span class="count">(%s)</span>', 'Cancelled <span class="count">(%s)</span>', 'woocommerce' )
 		) );
-		/*
+		
 		register_post_status( 'wc-refunded', array(
 			'label'                     => _x( 'Refunded', 'Order status', 'woocommerce' ),
 			'public'                    => false,
@@ -446,7 +446,6 @@ class WC_Post_types {
 			'show_in_admin_status_list' => true,
 			'label_count'               => _n_noop( 'Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>', 'woocommerce' )
 		) );
-		*/
 	}
 }
 

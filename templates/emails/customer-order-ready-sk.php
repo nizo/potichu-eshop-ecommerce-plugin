@@ -31,7 +31,7 @@ if (!$potichu_courier_chosen) { ?>
 	<p>
 	Vaša objednávka je od <strong>nasledujúceho pracovného dňa</strong> pripravená na osobný odber v&nbsp;<a href="http://www.potichu.sk/kontakt/#warehouse-location" target="_blank">našom sklade</a>. <br><br>
 
-	<b>Telefónny kontakt na sklad:</b><br> <a href="tel:+421 907 720 886">+421 907 720 886</a>
+	<b>Telefónny kontakt na sklad:</b><br> <a href="tel:+421918720800">+421 918 720 800</a>
 
 	<br><br>
 
