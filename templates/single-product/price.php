@@ -16,18 +16,31 @@ global $product;
 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
 	<p class="price table">
-	
+
 		<span class="row">
-			<span class="label-container">Cena s DPH:</span><span class="vat"><?php echo $product->get_price_including_tax(1, null, true) . ' ' . get_woocommerce_currency_symbol(); ?></span>
+			<span class="label-container">Cena:</span>
+			<span class="vat">
+				<?php
+					if ( $product->is_on_sale() ) {
+						$regularPrice = price_add_trailing_zeros($product->get_price_including_tax( 1, $product->get_regular_price() ));
+						echo '<del>' . $regularPrice . '&nbsp;' . get_woocommerce_currency_symbol() . '</del>';
+					}
+					echo $product->get_price_including_tax(1, null, true) . '&nbsp;' . get_woocommerce_currency_symbol();
+			?>
+			</span>
 		</span>
-		
+
 		<span class="row">
 			<span class="label-container">Cena bez DPH:</span><span class="vat-excluded"><?php echo $product->get_price_excluding_tax() . ' ' . get_woocommerce_currency_symbol(); ?></span>
 		</span>
-		
-		<span class="row">
-			<span class="label-container">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: '; ?> </span><span class="vat-excluded"><?php echo potichu_get_unit_price(get_the_ID()) . '  ' . get_woocommerce_currency_symbol();?></span>		
-		</span>
+		<?php
+
+		if ( !$product->is_on_sale() ) {
+			?>
+			<span class="row">
+				<span class="label-container">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: '; ?> </span><span class="vat-excluded"><?php echo potichu_get_unit_price(get_the_ID()) . '  ' . get_woocommerce_currency_symbol();?></span>		
+			</span>
+		<?php } ?>
 
 	</p>
 
