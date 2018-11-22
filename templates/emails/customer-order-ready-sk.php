@@ -12,16 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php
 
 $shipping_methods = $order->get_shipping_methods();
- 
+
 foreach ( $shipping_methods as $shipping ) {
-	$shippingID = ($shipping['item_meta']['method_id'][0]);		
+	$shippingID = ($shipping['item_meta']['method_id'][0]);
 }
 
-$potichu_courier_chosen = ($shippingID == 'flat_rate_reg');
+$potichu_courier_chosen = (($shippingID == 'flat_rate_reg') || $shippingID == 'free_shipping');
 $email_heading = ($potichu_courier_chosen ? 'Objednávka pripravená na odoslanie' : 'Objednávka pripravená od <strong>nasledujúceho dňa</strong> na vyzdvihnutie');
 
 ?>
-<?php $email_heading = 'Objednávka pripravená na odoslanie'; ?>
+<?php
+//$email_heading = 'Objednávka pripravená na odoslanie';
+?>
 <?php do_action( 'woocommerce_email_header', $email_heading ); ?>
 
 
@@ -52,13 +54,13 @@ if (!$potichu_courier_chosen) { ?>
 	</p>
 
 <? } else { ?>
-	<p>	
-	Vaša objednávka je skompletizovaná a pripravená na expedíciu, <strong>očakávajte zásielku kuriérom v priebehu nasledujúcich dvoch až troch pracovných dní.</strong><br><br>	
-	Ak ste zvolili platbu dobierkou, momentálne je možná iba platba kuriérovi <strong>v&nbsp;hotovosti.</strong><br><br>	
-		
+	<p>
+	Vaša objednávka je skompletizovaná a pripravená na expedíciu, <strong>očakávajte zásielku kuriérom v priebehu nasledujúcich dvoch až troch pracovných dní.</strong><br><br>
+	Ak ste zvolili platbu dobierkou, momentálne je možná iba platba kuriérovi <strong>v&nbsp;hotovosti.</strong><br><br>
+
 	Ďakujeme Vám za prejavenú dôveru a veríme, že sa na nás v budúcnosti znovu obrátite.
 
-	V prípade akýchkoľvek otázok nás kontaktujte na <a target="_blank" href="http://www.potichu.sk/kontakt">www.potichu.sk</a>.	
+	V prípade akýchkoľvek otázok nás kontaktujte na <a target="_blank" href="http://www.potichu.sk/kontakt">www.potichu.sk</a>.
 	</p>
 
 
