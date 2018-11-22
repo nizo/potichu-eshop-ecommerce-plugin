@@ -18,11 +18,11 @@ foreach ( $shipping_methods as $shipping ) {
 }
 
 $potichu_courier_chosen = (($shippingID == 'flat_rate_reg') || $shippingID == 'free_shipping');
-$email_heading = ($potichu_courier_chosen ? 'Objednávka pripravená na odoslanie' : 'Objednávka pripravená od <strong>nasledujúceho dňa</strong> na vyzdvihnutie');
+$email_heading = ($potichu_courier_chosen ? 'Objednávka pripravená na odoslanie' : 'Objednávka pripravená na vyzdvihnute');
 
 ?>
 <?php
-//$email_heading = 'Objednávka pripravená na odoslanie';
+
 ?>
 <?php do_action( 'woocommerce_email_header', $email_heading ); ?>
 

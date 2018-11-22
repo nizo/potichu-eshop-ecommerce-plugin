@@ -11,8 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $product;
 ?>
-<?php if ( $product->is_on_sale() ) : ?>
+<?php if ( $product->is_on_sale() ) :
 
-	<?php echo apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . __( 'Sale!', 'woocommerce' ) . '</span>', $post, $product ); ?>
+	$price = $product->get_price_including_tax( 1, $product->get_regular_price());
+	$discountPrice = $product->get_price_including_tax(1, null);
+	$discountInPercent = 100 - round(($discountPrice / $price) * 100);
 
-<?php endif; ?>
+	echo apply_filters( 'woocommerce_sale_flash', '<span class="sale-label">' . __( 'Sale!', 'woocommerce' ) . ' ' . $discountInPercent . ' %</span>', $post, $product );
+
+endif; ?>

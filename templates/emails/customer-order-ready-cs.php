@@ -18,7 +18,7 @@ foreach ( $shipping_methods as $shipping ) {
 }
 
 $potichu_courier_chosen = (($shippingID == 'flat_rate_reg') || $shippingID == 'free_shipping');
-$email_heading = ($potichu_courier_chosen ? 'Objednávka připravena k odeslání' : 'Objednávka připravena od <strong> následujícího dne </ strong> na vyzvednutí')
+$email_heading = ($potichu_courier_chosen ? 'Objednávka připravena k odeslání' : 'Objednávka připravena k vyzvednutí');
 
 ?>
 

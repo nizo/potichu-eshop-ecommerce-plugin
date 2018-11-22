@@ -46,6 +46,10 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 
 	<?php
 		$saleActive = $product->is_on_sale();
+		$price = $product->get_price_including_tax( 1, $product->get_regular_price());
+		$discountPrice = $product->get_price_including_tax(1, null);
+		$discountPriceFormatted = $product->get_price_including_tax(1, null, true);
+		$discountInPercent = 100 - round(($discountPrice / $price) * 100);
 
 		if (!$saleActive) {
 			if ($product->get_total_stock() > get_option( 'woocommerce_notify_no_stock_amount' )) {
@@ -55,7 +59,11 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 			}
 		}
 		?>
-
+		<?php
+			if ($saleActive) {
+				echo '<div class="sale-label">' . __( 'Sale!', 'woocommerce' ) . ' ' . $discountInPercent . ' %</div>';
+			}
+		?>
 	<a href="<?php the_permalink(); ?>">
 
 		<?php
@@ -70,23 +78,18 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 
 		<h3><?php the_title(); ?></h3>
 
+	
 		<div class="front-page-price-info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
-				<?php
-				if ($saleActive) {
-					echo '<div class="sale">' . __( 'Sale!', 'woocommerce' ) . '</div>';
-				}
-				?>
 
 			<p class="price">
 				<span class="vat">
 					<?php
 
 						if ( $saleActive ) {
-							$regularPrice = price_add_trailing_zeros($product->get_price_including_tax( 1, $product->get_regular_price() ));
-							echo '<del>' . $regularPrice . '&nbsp;' . get_woocommerce_currency_symbol() . '</del><br/>';
+							echo '<del>' . price_add_trailing_zeros($price) . '&nbsp;' . get_woocommerce_currency_symbol() . '</del><br/>';
 						}
-						echo $product->get_price_including_tax(1, null, true) . '&nbsp;' .  get_woocommerce_currency_symbol();
+						echo $discountPriceFormatted . '&nbsp;' .  get_woocommerce_currency_symbol();
 					?>
 				</span>
 				<span style="margin-top:5px; display: block;">Bez DPH: <?php echo $product->get_price_excluding_tax() . ' ' . get_woocommerce_currency_symbol(); ?></span>
