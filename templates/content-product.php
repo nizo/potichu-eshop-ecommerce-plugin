@@ -95,7 +95,7 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 				<span style="margin-top:5px; display: block;">Bez DPH: <?php echo $product->get_price_excluding_tax() . ' ' . get_woocommerce_currency_symbol(); ?></span>
 				<?php
 					if ( !$saleActive ) { ?>
-						<span class="price-per-area">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: ' . potichu_get_unit_price(get_the_ID()) . '  ' . get_woocommerce_currency_symbol();	?></span>
+						<span class="price-per-area">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: ' . potichu_compute_unit_price(get_the_ID(), $product->get_price_excluding_tax()) . '  ' . get_woocommerce_currency_symbol();	?></span>
 				<?php } ?>
 			</p>
 

@@ -38,7 +38,7 @@ global $product;
 		if ( !$product->is_on_sale() ) {
 			?>
 			<span class="row">
-				<span class="label-container">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: '; ?> </span><span class="vat-excluded"><?php echo potichu_get_unit_price(get_the_ID()) . '  ' . get_woocommerce_currency_symbol();?></span>		
+				<span class="label-container">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: '; ?> </span><span class="vat-excluded"><?php echo potichu_compute_unit_price(get_the_ID(), $product->get_price_excluding_tax()) . '  ' . get_woocommerce_currency_symbol();?></span>		
 			</span>
 		<?php } ?>
 
