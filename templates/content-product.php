@@ -51,18 +51,14 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 		$discountPriceFormatted = $product->get_price_including_tax(1, null, true);
 		$discountInPercent = 100 - round(($discountPrice / $price) * 100);
 
-		if (!$saleActive) {
-			if ($product->get_total_stock() > get_option( 'woocommerce_notify_no_stock_amount' )) {
-				echo '<div class="product-available">' . __( 'In stock', 'woocommerce' ) . '</div>';
-			} else {
-				echo '<div class="product-available externally">' . __( 'Available on backorder', 'woocommerce' ) . '</div>';
-			}
+		if ($product->get_total_stock() > get_option( 'woocommerce_notify_no_stock_amount' )) {
+			echo '<div class="product-available">' . __( 'In stock', 'woocommerce' ) . '</div>';
+		} else {
+			echo '<div class="product-available externally">' . __( 'Available on backorder', 'woocommerce' ) . '</div>';
 		}
-		?>
-		<?php
-			if ($saleActive) {
-				echo '<div class="sale-label">' . __( 'Sale!', 'woocommerce' ) . ' ' . $discountInPercent . ' %</div>';
-			}
+		if ($saleActive) {
+			echo '<div class="sale-label">' . __( 'Sale!', 'woocommerce' ) . ' ' . $discountInPercent . ' %</div>';
+		}
 		?>
 	<a href="<?php the_permalink(); ?>">
 
