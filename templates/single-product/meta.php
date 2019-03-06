@@ -10,9 +10,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $product;
+$product_cats = get_the_terms( $post->ID, 'product_cat' );
+$product_tags = get_the_terms( $post->ID, 'product_tag' );
 
-$cat_count = sizeof( get_the_terms( $post->ID, 'product_cat' ) );
-$tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
+if ($product_cats == null) $product_cats = [];
+if ($product_tags == null) $product_tags = [];
+
+$cat_count = sizeof( $product_cats );
+$tag_count = sizeof( $product_tags );
 ?>
 <div class="product_meta">
 
