@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $product;
 
 if ( ! $product->is_purchasable() ) return;
+if (!$product->is_visible()) return;
 ?>
 
 <?php

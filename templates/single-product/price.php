@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+
+if (!$product->is_visible()) return;
 ?>
 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
