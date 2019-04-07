@@ -1,3 +1,19 @@
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
+
 jQuery( function( $ ) {
 
 	// Orderby
@@ -53,5 +69,13 @@ jQuery( function( $ ) {
 
 		// Trigger change event
 		$qty.trigger( 'change' );
+	});
+
+	var recalculateCart = debounce(function() {
+		jQuery('input[name="update_cart"]').trigger('click');
+	}, 500);
+
+	$( 'body' ).on( 'change', 'input.qty', function() {
+		recalculateCart();
 	});
 });

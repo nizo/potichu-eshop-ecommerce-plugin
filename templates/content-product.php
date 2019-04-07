@@ -74,25 +74,20 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 
 		<h3><?php the_title(); ?></h3>
 
-	
 		<div class="front-page-price-info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
 
 			<p class="price">
 				<span class="vat">
 					<?php
-
-						if ( $saleActive ) {
-							echo '<del>' . price_add_trailing_zeros($price) . '&nbsp;' . get_woocommerce_currency_symbol() . '</del><br/>';
-						}
 						echo $discountPriceFormatted . '&nbsp;' .  get_woocommerce_currency_symbol();
+						if ( $saleActive ) {
+							echo '<del>' . price_add_trailing_zeros($price) . '&nbsp;' . get_woocommerce_currency_symbol() . '</del>';
+						}
 					?>
 				</span>
 				<span style="margin-top:5px; display: block;">Bez DPH: <?php echo $product->get_price_excluding_tax() . ' ' . get_woocommerce_currency_symbol(); ?></span>
-				<?php
-					if ( !$saleActive ) { ?>
-						<span class="price-per-area">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: ' . potichu_compute_unit_price(get_the_ID(), $product->get_price_excluding_tax()) . '  ' . get_woocommerce_currency_symbol();	?></span>
-				<?php } ?>
+				<span class="price-per-area">Cena za <?php echo potichu_get_measuring_unit(get_the_ID()) . ' bez DPH: ' . potichu_compute_unit_price(get_the_ID(), $product->get_price_excluding_tax()) . '  ' . get_woocommerce_currency_symbol();	?></span>			
 			</p>
 
 			<meta itemprop="price" content="<?php echo $product->get_price(); ?>" />
@@ -102,6 +97,8 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 		</div>
 	</a>
 
-	<?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+	<?php
+	// do_action( 'woocommerce_after_shop_loop_item' );
+	?>
 
 </li>

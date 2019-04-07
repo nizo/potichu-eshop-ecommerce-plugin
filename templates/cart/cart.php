@@ -74,7 +74,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					</td>
 
 					<td class="product-price">
-						<?php														
+						<?php
 							echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
 						?>
 					</td>
@@ -110,13 +110,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 		do_action( 'woocommerce_cart_contents' );
 		?>
 		<tr>
-			<td colspan="6" class="actions">															
+			<td colspan="6" class="actions">
 				<div class="cart-meta-sumary"><?php _e('Rozmer dodávky:', 'woocommerce'); ?> <span><?php echo get_package_dimensions(WC()->cart->get_cart()); ?> m<sup>3</sup></span></br><?php _e('Hmotnosť dodávky:', 'woocommerce'); ?> <span><?php echo WC()->cart->cart_contents_weight; ?> kg</span></div>
-				
+
 				<a href="<?php echo home_url(); ?>" class="keep-shopping"><?php _e('Späť do obchodu', 'woocommerce'); ?></a>
 				<input type="submit" class="checkout-button button alt wc-forward" name="proceed" value="<?php _e( 'Proceed to Checkout', 'woocommerce' ); ?>" />
 				<input type="submit" class="button" name="update_cart" value="<?php _e( 'Update Cart', 'woocommerce' ); ?>" />
-				
+
 
 				<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
 
