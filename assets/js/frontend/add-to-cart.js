@@ -116,3 +116,9 @@ jQuery( function( $ ) {
 	});
 
 });
+
+function cartFormSubmitted() {
+	jQuery(document.body).addClass('cart-submitted');
+	jQuery('input.wc-forward').attr('disabled');
+}
+

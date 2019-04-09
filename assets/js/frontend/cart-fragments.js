@@ -11,7 +11,6 @@ jQuery( function( $ ) {
 	} catch( err ) {
 		$supports_html5_storage = false;
 	}
-
 	$fragment_refresh = {
 		url: wc_cart_fragments_params.ajax_url,
 		type: 'POST',

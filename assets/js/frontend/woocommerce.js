@@ -73,7 +73,7 @@ jQuery( function( $ ) {
 
 	var recalculateCart = debounce(function() {
 		jQuery('input[name="update_cart"]').trigger('click');
-	}, 500);
+	}, 400);
 
 	$( 'body' ).on( 'change', 'input.qty', function() {
 		recalculateCart();
